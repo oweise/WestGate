@@ -9,9 +9,21 @@
 
     <packaging>pom</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>bom-all</artifactId>
+                <version>${version.wildfly.swarm}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
         <module>wgapi</module>
+        <module>cms</module>
         <module>server</module>
     </modules>
 
@@ -21,6 +33,14 @@
 
         <lucene.version>3.5.0</lucene.version>
         <jackrabbit.version>1.6.5</jackrabbit.version>
+        <jersey.version>2.19</jersey.version>
+
+        <version.wildfly.swarm>2018.5.0</version.wildfly.swarm>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <version.wildfly.swarm>2018.5.0</version.wildfly.swarm>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
 

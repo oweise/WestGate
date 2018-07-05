@@ -339,7 +339,6 @@ public abstract class WGUtils {
     /**
      * Serializes a collection to a single String using the given divider.
      * Collections serialized by this method can be deserialized again by
-     * {@link de.innovationgate.utils#WGUtils.deserializeCollection deserializeCollection}.
      * This version takes a special object formatter object, that formats the
      * collection elements before they are added to the result string. The
      * formatter can be used to convert non-string values in the collection to
@@ -404,7 +403,6 @@ public abstract class WGUtils {
     /**
      * Serializes a collection to a single String using the given divider.
      * Collections serialized by this method can be deserialized again by
-     * {@link de.innovationgate.utils#WGUtils.deserializeCollection deserializeCollection}.
      * This version takes a special object formatter object, that formats the
      * collection elements before they are added to the result string. The
      * formatter can be used to convert non-string values in the collection to
@@ -621,7 +619,6 @@ public abstract class WGUtils {
      * Serializes a collection (containing strings) to a single String using the
      * given divider. Collections serialized by this method can be deserialized
      * again by
-     * {@link de.innovationgate.utils#WGUtils.deserializeCollection deserializeCollection}.
      * 
      * @param col
      *            The collection

@@ -65,11 +65,11 @@ public abstract class ConfigBean implements Serializable {
     @NormalizeEmptyValue
     private String description;
     
-    public final List<ValidationError> validate() {
+    public List<ValidationError> validate() {
         return validate(false);
     }
 
-    public final List<ValidationError> validate(boolean integrityCheckOnly) {
+    public List<ValidationError> validate(boolean integrityCheckOnly) {
         List<ValidationError> errors = new ArrayList<ValidationError>();
         validate(errors, integrityCheckOnly);
         return errors;
@@ -312,7 +312,7 @@ public abstract class ConfigBean implements Serializable {
         return annotation.annotationType().isAnnotationPresent(Constraint.class);
     }
 
-    private static final Object normalize(Object value) {
+    private static Object normalize(Object value) {
         if (value instanceof String) {
             if (value != null && !((String) value).trim().equals("")) {
                 return value;

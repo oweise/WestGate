@@ -23,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -31,6 +32,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.enterprise.inject.spi.CDI;
 
 import org.apache.log4j.Logger;
 
@@ -546,7 +549,14 @@ public class ModuleRegistry {
      */
     public Object instantiate(Class<? extends Object> moduleClass) throws ModuleInstantiationException {
         try {
-            Object obj = moduleClass.newInstance();
+            Object obj;
+            if (Arrays.asList(moduleClass.getInterfaces()).contains(CDIEnabledModule.class)) {
+                obj = CDI.current().select(moduleClass).get();
+            }
+            else {
+                obj = moduleClass.newInstance();
+            }
+
             if (obj instanceof RegistryAwareModule) {
                 ((RegistryAwareModule) obj).injectRegistry(this);
             }
