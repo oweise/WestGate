@@ -36,7 +36,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.lang.reflect.Constructor;
@@ -50,8 +49,6 @@ import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.cert.X509Certificate;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,8 +76,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import javax.activation.DataHandler;
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.crypto.SecretKey;
 import javax.enterprise.context.ApplicationScoped;
@@ -96,8 +91,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -148,7 +141,6 @@ import de.innovationgate.utils.PatternListVerifier;
 import de.innovationgate.utils.ReplaceProcessor;
 import de.innovationgate.utils.TempFileInputStream;
 import de.innovationgate.utils.TemporaryFile;
-import de.innovationgate.utils.TransientObjectWrapper;
 import de.innovationgate.utils.URLBuilder;
 import de.innovationgate.utils.WGUtils;
 import de.innovationgate.utils.XStreamUtils;
@@ -199,7 +191,6 @@ import de.innovationgate.webgate.api.servers.WGDatabaseServer;
 import de.innovationgate.webgate.api.utils.ContentStoreDumpManager;
 import de.innovationgate.webgate.api.workflow.WGDefaultWorkflowEngine;
 import de.innovationgate.wga.common.Constants;
-import de.innovationgate.wga.common.LogLevel;
 import de.innovationgate.wga.common.beans.csconfig.v1.CSConfig;
 import de.innovationgate.wga.common.beans.csconfig.v1.ElementMapping;
 import de.innovationgate.wga.common.beans.csconfig.v1.EncoderMapping;
@@ -341,8 +332,6 @@ import de.innovationgate.wgpublisher.scheduler.PendingReleaseTask;
 import de.innovationgate.wgpublisher.scheduler.Scheduler;
 import de.innovationgate.wgpublisher.scheduler.ScriptTask;
 import de.innovationgate.wgpublisher.scheduler.Task;
-import de.innovationgate.wgpublisher.sessions.AbstractWGAHttpSessionManager;
-import de.innovationgate.wgpublisher.sessions.WGAHttpSessionListener;
 import de.innovationgate.wgpublisher.shares.ShareDefinition;
 import de.innovationgate.wgpublisher.shares.ShareInitException;
 import de.innovationgate.wgpublisher.shares.ShareProperties;
@@ -385,8 +374,8 @@ import de.innovationgate.wgpublisher.webtml.utils.UniqueNamePartFormatter;
 @ApplicationScoped
 @Default
 public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassLoaderProvider {
-    
-    public static final WGACore INSTANCE = new WGACore();
+
+    public static WGACore INSTANCE;
     
     public static final String JOBNAME_PUBLISH_PENDING_RELEASE = "Publish contents pending release";
     public static final String JOBNAME_OPTIMIZE_LUCENE_INDEX = "Optimize Lucene Index";
@@ -533,157 +522,6 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
 
     public interface OptionFetcher {
         Map<String,String> fetch(WGAConfiguration config);
-    }
-    
-    /**
-     * Map to store session logins, either transient or persistent depending on the serializability of their credentials
-     * The map may return null for values that were created transiently on another cluster node.
-     */
-    public static class SessionLoginMap implements Map<Object,DBLoginInfo>, Serializable {
-
-        private static final long serialVersionUID = 1L;
-        
-        private Map<Object,TransientObjectWrapper<DBLoginInfo>> _map = new HashMap<Object, TransientObjectWrapper<DBLoginInfo>>();
-        
-        
-        @Override
-        public DBLoginInfo put(Object key, DBLoginInfo value) {
-            TransientObjectWrapper<DBLoginInfo> wrapper = wrap(value);
-            
-            DBLoginInfo oldValue = get(key);
-            if (oldValue != null) {
-                
-                if (oldValue.equals(value)) {
-                    return oldValue;
-                }
-                
-                if (oldValue.getAccessFilter() != null && value.getAccessFilter() == null) {
-                    value.setAccessFilter(oldValue.getAccessFilter());
-                }
-                for (Map.Entry<String,String> dbFilter : oldValue.getDbAccessFilters().entrySet()) {
-                    if (!value.getDbAccessFilters().containsKey(dbFilter.getKey())) {
-                        value.getDbAccessFilters().put(dbFilter.getKey(), dbFilter.getValue());
-                    }
-                }
-                
-            }
-            
-            return unwrap(_map.put(key, wrapper));
-        }
-
-        private TransientObjectWrapper<DBLoginInfo> wrap(DBLoginInfo value) {
-            TransientObjectWrapper<DBLoginInfo> wrapper;
-            if (value.getCredentials() == null || value.getCredentials() instanceof Serializable) {
-                wrapper = new TransientObjectWrapper<DBLoginInfo>(false);
-            }
-            else {
-                wrapper = new TransientObjectWrapper<DBLoginInfo>(true);
-            }
-            wrapper.set(value);
-            return wrapper;
-        }
-
-
-        private DBLoginInfo unwrap(TransientObjectWrapper<DBLoginInfo> wrapper) {
-            if (wrapper == null) {
-                return null;
-            }
-            else {
-                return wrapper.get();
-            }
-        }
-
-        @Override
-        public void clear() {
-            _map.clear();
-        }
-
-        @Override
-        public boolean containsKey(Object arg0) {
-            return _map.containsKey(arg0);
-        }
-
-        @Override
-        public boolean containsValue(Object arg0) {
-            for (TransientObjectWrapper<DBLoginInfo> wrapper : _map.values()) {
-                if (arg0.equals(wrapper.get())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public Set<java.util.Map.Entry<Object, DBLoginInfo>> entrySet() {
-            
-            Set<java.util.Map.Entry<Object, DBLoginInfo>> set = new HashSet<Map.Entry<Object,DBLoginInfo>>();
-            for (final Map.Entry<Object,TransientObjectWrapper<DBLoginInfo>> entry : _map.entrySet()) {
-                set.add(new Map.Entry<Object, DBLoginInfo>() {
-                    
-                    @Override
-                    public Object getKey() {
-                        return entry.getKey();
-                    }
-
-                    @Override
-                    public DBLoginInfo getValue() {
-                        return unwrap(entry.getValue());
-                    }
-
-                    @Override
-                    public DBLoginInfo setValue(DBLoginInfo value) {
-                        return unwrap(entry.setValue(wrap(value))); 
-                    }
-                    
-                    
-                });
-            }
-            return set;
-        }
-
-        @Override
-        public DBLoginInfo get(Object arg0) {
-            return unwrap(_map.get(arg0));
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return _map.isEmpty();
-        }
-
-        @Override
-        public Set<Object> keySet() {
-            return _map.keySet();
-        }
-
-        @Override
-        public void putAll(Map<? extends Object, ? extends DBLoginInfo> map) {
-            for (Object key : map.keySet()) {
-                put(key, map.get(key));
-            }
-        }
-
-        @Override
-        public DBLoginInfo remove(Object arg0) {
-            return unwrap(_map.remove(arg0));
-        }
-
-        @Override
-        public int size() {
-            return _map.size();
-        }
-
-        @Override
-        public Collection<DBLoginInfo> values() {
-            
-            List<DBLoginInfo> values = new ArrayList<DBLoginInfo>();
-            for (TransientObjectWrapper<DBLoginInfo> wrapper : _map.values()) {
-                values.add(wrapper.get());
-            }
-            return values;
-            
-        }
-        
     }
 
     public class ServletFilterUpdater implements ModuleRegistryChangeListener {
@@ -3860,6 +3698,8 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
     @Inject
     public void WGACore(WGAConfiguration wgaConfiguration) throws ServletException {
         try {
+            INSTANCE = this;
+
             // General inits
             this.instanceActiveSince = new Date();
             WGFactory.setAuthModuleFactory(new WGAAuthModuleFactory(this));

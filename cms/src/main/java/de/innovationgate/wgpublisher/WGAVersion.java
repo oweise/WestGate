@@ -37,39 +37,11 @@ public abstract class WGAVersion {
     
     public static final Properties BUILD_PROPERTIES = new Properties();
     static {
-        InputStream propsIn = null;
-        try {
-            if (WGACore.INSTANCE.getServletContext() != null) {
-                propsIn = WGACore.INSTANCE.getServletContext().getResourceAsStream("/WEB-INF/wgabuild.properties");
-                if (propsIn == null) {
-                    throw new Error("/WEB-INF/wgabuild.properties does not exist");
-                }
-                
-                BUILD_PROPERTIES.load(propsIn);
-            }
-            
-            // Defaults for other environments without running WGACore, just for the sake of preventing crashes
-            else {
-                BUILD_PROPERTIES.setProperty("build", "639");
-                BUILD_PROPERTIES.setProperty("majorVersion", "7");
-                BUILD_PROPERTIES.setProperty("minorVersion", "2");
-                BUILD_PROPERTIES.setProperty("maintenanceVersion", "0");
-                BUILD_PROPERTIES.setProperty("patchVersion", "0");
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (propsIn != null) {
-                try {
-                    propsIn.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        BUILD_PROPERTIES.setProperty("build", "0");
+        BUILD_PROPERTIES.setProperty("majorVersion", "2018");
+        BUILD_PROPERTIES.setProperty("minorVersion", "01");
+        BUILD_PROPERTIES.setProperty("maintenanceVersion", "0");
+        BUILD_PROPERTIES.setProperty("patchVersion", "0");
     }
 
     public static final int WGAPUBLISHER_BUILD_VERSION = Integer.parseInt(BUILD_PROPERTIES.getProperty("build"));

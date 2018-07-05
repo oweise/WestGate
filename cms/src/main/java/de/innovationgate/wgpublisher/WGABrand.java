@@ -40,7 +40,7 @@ public abstract class WGABrand {
         InputStream propsIn = null;
         try {
             if (WGACore.INSTANCE.getServletContext() != null) {
-                propsIn = WGACore.INSTANCE.getServletContext().getResourceAsStream("/WEB-INF/brand.properties");
+                propsIn = WGABrand.class.getClassLoader().getResourceAsStream("brand.properties");
                 if (propsIn == null) {
                     throw new Error("/WEB-INF/brand.properties does not exist");
                 }

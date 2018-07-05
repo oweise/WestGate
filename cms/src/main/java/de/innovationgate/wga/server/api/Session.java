@@ -32,7 +32,7 @@ import de.innovationgate.webgate.api.WGException;
 import de.innovationgate.wga.common.CodeCompletion;
 import de.innovationgate.wgpublisher.DBLoginInfo;
 import de.innovationgate.wgpublisher.WGACore;
-import de.innovationgate.wgpublisher.WGACore.SessionLoginMap;
+import de.innovationgate.wgpublisher.SessionLoginMap;
 import de.innovationgate.wgpublisher.WGPDispatcher;
 import de.innovationgate.wgpublisher.websockets.IndependentWebSocket;
 
