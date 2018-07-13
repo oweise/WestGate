@@ -160,7 +160,7 @@ import de.innovationgate.wgpublisher.webtml.utils.TMLUserProfile;
 
 @ApplicationScoped
 @Default
-@WebServlet(name = "WGPDispatcher", loadOnStartup = 0, urlPatterns = "/*")
+@WebServlet(name = "WGPDispatcher", loadOnStartup = 0, urlPatterns = "/")
 public class WGPDispatcher extends HttpServlet {
 
     public static final String SESSION_AJAX_GENERAL_FAILURE_MESSAGE_SHOWN = "de.innovationgate.ajax.GeneralFailureMessageShown";

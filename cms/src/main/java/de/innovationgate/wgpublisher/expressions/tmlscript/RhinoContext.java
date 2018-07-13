@@ -26,6 +26,7 @@ package de.innovationgate.wgpublisher.expressions.tmlscript;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.ErrorReporter;
 
 public class RhinoContext extends Context {
     

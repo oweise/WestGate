@@ -307,12 +307,18 @@ public class TMLContext implements TMLObject, de.innovationgate.wga.server.api.t
         }
         
         if (contexts != null) {
-            TMLContext lastContext = contexts.removeLast();
-            if (lastContext != this) {
-                try {
-                    getlog().error("Error in WebTML context management: Thread main context mismatch on removal. Removed: " + this.getpath() + " (" + System.identityHashCode(this) + "), In stack: " + lastContext.getpath() + " (" + System.identityHashCode(lastContext) + ")");
-                }
-                catch (WGAPIException e) {
+            if (contexts.peekLast() == null) {
+                getlog().error("Error in WebTML context management: Thread main context mismatch on removal. Stack is empty");
+            }
+            else {
+                TMLContext lastContext = contexts.removeLast();
+                if (lastContext != this) {
+                    try {
+                        getlog().error(
+                                "Error in WebTML context management: Thread main context mismatch on removal. Removed: "
+                                        + this.getpath() + " (" + System.identityHashCode(this) + "), In stack: " + lastContext.getpath() + " (" + System.identityHashCode(lastContext) + ")");
+                    } catch (WGAPIException e) {
+                    }
                 }
             }
         }

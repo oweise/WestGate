@@ -694,10 +694,13 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
     public class WGAMimetypeDeterminationService extends DefaultMimetypeDeterminationService {
 
         public String determineByFilename(String fileName) {
-            String mimeType = servletContext.getMimeType(fileName);
-            if (mimeType == null) {
-                mimeType = super.determineByFilename(fileName);
-            }
+
+
+            // Can't do that anymore as Wildfly needs a Request Scope for servletContext ops.
+            // String mimeType = servletContext.getMimeType(fileName);
+            // if (mimeType == null) {
+                String mimeType = super.determineByFilename(fileName);
+            //}
             return mimeType;
         }
         

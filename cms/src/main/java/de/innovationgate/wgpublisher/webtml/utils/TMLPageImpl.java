@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.inject.spi.CDI;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -70,6 +71,7 @@ import de.innovationgate.wgpublisher.webtml.utils.TMLContext.ListVarContainer;
 public class TMLPageImpl implements TMLPage {
 
     private final WGPDeployer _deployer;
+    private final ServletContext _servletContext;
 
     public interface OuterLayoutWriter {
         
@@ -82,6 +84,7 @@ public class TMLPageImpl implements TMLPage {
     public TMLPageImpl(WGA wga) {
         _wga = wga;
         _deployer = CDI.current().select(WGPDeployer.class).get();
+        _servletContext = CDI.current().select(ServletContext.class).get();
     }
     
     private PageContext getPageContext() throws WGException {
@@ -399,7 +402,7 @@ public class TMLPageImpl implements TMLPage {
                 public void write(HttpServletRequest req, HttpServletResponse res) throws HttpErrorException, ServletException, IOException, WGAPIException, DeployerException {
                     String targetJSP = _deployer.locateTmlResource(mod, req);
                     if (targetJSP != null) {
-                        _wga.getCore().getDispatcher().getServletContext().getRequestDispatcher(targetJSP).include(req, res);
+                        _servletContext.getRequestDispatcher(targetJSP).include(req, res);
                     }
                     else {
                         throw new HttpErrorException(500, "WebTML module not active: " + mod.getDocumentKey().toString(), mod.getDatabase().getDbReference());

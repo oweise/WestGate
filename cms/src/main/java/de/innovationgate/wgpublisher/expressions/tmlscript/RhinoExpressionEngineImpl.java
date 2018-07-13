@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.json.Json;
@@ -486,8 +487,10 @@ public class RhinoExpressionEngineImpl implements ExpressionEngine, RhinoExpress
                 
                 // Restore preserved ThreadLocal values
                 preserver.restore();
-                
-                rcx.setErrorReporter(oldErrorReporter);
+
+                if (oldErrorReporter != null) {
+                    rcx.setErrorReporter(oldErrorReporter);
+                }
             }
             
         }
