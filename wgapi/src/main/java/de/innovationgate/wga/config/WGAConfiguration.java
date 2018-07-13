@@ -89,10 +89,10 @@ public class WGAConfiguration extends ConfigBean {
 	public static final String SYSPROP_LUCENE_ROOT = "de.innovationgate.wga.migration.lucene.root";
 	public static final String SYSPROP_WARNINGS_ON_SERVER_CONSOLE = "de.innovationgate.wga.outputWarningsOnConsole";
 	
-	public static final String DEFAULT_DESIGNROOT = "designs";
+	public static final String DEFAULT_DESIGNROOT = "cms/designs";
 
 	public static final String UID_DEFAULT_DOMAIN = "default";
-	public static final String UID_EMBEDDED_DBSERVER = WGAConfiguration.SINGLETON_SERVER_PREFIX + "de.innovationgate.wgpublisher.servers.HsqlDefaultDatabaseServer";
+	public static final String UID_EMBEDDED_DBSERVER = "hsql";
 	public static final String UID_DESIGNSOURCE_DB = Constants.DESIGNCOL_DB;
 	public static final String UID_DESIGNSOURCE_FILESYSTEM = Constants.DESIGNCOL_FILESYSTEM;
 	public static final String UID_DESIGNSOURCE_PLUGIN = Constants.DESIGNCOL_PLUGIN;

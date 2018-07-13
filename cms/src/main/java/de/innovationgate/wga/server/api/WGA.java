@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1524,7 +1524,7 @@ public class WGA {
     
     /**
      * Creates a Mail object for sending e-mails.
-     * This variant uses the mail configuration of the OpenWGA server.
+     * This variant uses the mail configuration of the OpenWGA databaseServer.
      * @return A new Mail object
      * @throws UnsupportedEncodingException
      * @throws UnavailableResourceException
@@ -1536,14 +1536,14 @@ public class WGA {
             return new SmtpMail(mailConfig);
         }
         else {
-            throw new UnavailableResourceException("No mail configuration available on this server");
+            throw new UnavailableResourceException("No mail configuration available on this databaseServer");
         }
         
     }
 
     /**
      * Creates a Mail object for sending e-mails.
-     * This variant uses the mail configuration of the OpenWGA server.
+     * This variant uses the mail configuration of the OpenWGA databaseServer.
      * @param config - a map containing config params for the mail object
      * @return A new Mail object
      * @throws UnsupportedEncodingException
@@ -1600,7 +1600,7 @@ public class WGA {
             return mail;
         }
         else {
-            throw new UnavailableResourceException("No mail configuration available on this server");
+            throw new UnavailableResourceException("No mail configuration available on this databaseServer");
         }
         
     }
@@ -1741,7 +1741,7 @@ public class WGA {
     
     /**
      * Encodes some text with a WebTML encoding
-     * This is the server API pendant of WebTML attribute encode. You can use all encodings that are available to the current OpenWGA runtime and are also usable on the attribute.
+     * This is the databaseServer API pendant of WebTML attribute encode. You can use all encodings that are available to the current OpenWGA runtime and are also usable on the attribute.
      * @param encoding Name of the encoding, f.e. "html", "rtf"
      * @param obj The text to encode. Non strings will internally be converted to strings.
      * @return Encoded text
@@ -2323,7 +2323,7 @@ public class WGA {
     }
     
     /**
-     * Returns a subobject "Server" providing information and services regarding the OpenWGA server runtime and installation
+     * Returns a subobject "Server" providing information and services regarding the OpenWGA databaseServer runtime and installation
      */
     @CodeCompletion
     public Server server() {
@@ -2816,7 +2816,7 @@ public class WGA {
             }
         }
 
-        // Try to find server configuration about what implementation to use.
+        // Try to find databaseServer configuration about what implementation to use.
         ModuleDefinition implDef = null;
         if (serviceProps.isImplementable()) {
             String configuredApi = getCore().getWgaConfiguration().getServerOptions().get(WGAConfiguration.SERVEROPTION_SERVICE_APIS_PREFIX + serviceDefinition.getImplementationClass().getName());

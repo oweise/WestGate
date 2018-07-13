@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,14 +57,14 @@ public class ServiceApiProperties {
     }
 
     /**
-     * Returns if the implementation choice setting in server config should be optional. Defaults to false.
+     * Returns if the implementation choice setting in databaseServer config should be optional. Defaults to false.
      */
     public boolean isOptionalConfig() {
         return _optionalConfig;
     }
 
     /**
-     * Sets if the implementation choice setting in server config should be optional
+     * Sets if the implementation choice setting in databaseServer config should be optional
      */
     public void setOptionalConfig(boolean optionalConfig) {
         _optionalConfig = optionalConfig;

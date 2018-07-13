@@ -32,9 +32,9 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 
 /**
- * A lightweight object representing a TMLForm that is to be sent to the WGA server when calling a remote action.
+ * A lightweight object representing a TMLForm that is to be sent to the WGA databaseServer when calling a remote action.
  * The form can be equipped with fields and file attachments.
- * When posted to the server it is available to the remote action as normal TMLForm-Object in TMLScript
+ * When posted to the databaseServer it is available to the remote action as normal TMLForm-Object in TMLScript
  * Only plain field values (String, Number, Date) can be posted.
  */
 public class Form {

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ import de.innovationgate.wgpublisher.webtml.utils.TMLDesignContext;
 import de.innovationgate.wgpublisher.webtml.utils.TMLOption;
 
 /**
- * A design context implementation for the server API, used when outside any WebTML/TMLScript environment
+ * A design context implementation for the databaseServer API, used when outside any WebTML/TMLScript environment
  */
 public class DesignContext implements TMLDesignContext {
     

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ public class JspHelper {
 	}
 	
 	/**
-	 * Returns the path to the WGAPublisher on this server, excluding any additional path information. 
+	 * Returns the path to the WGAPublisher on this databaseServer, excluding any additional path information.
 	 */
 	public String getPublisherPath() {
 		

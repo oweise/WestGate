@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Information about a configured database server
+ * Information about a configured database databaseServer
  */
 public class DatabaseServerInfo {
 
@@ -40,49 +40,49 @@ public class DatabaseServerInfo {
     private List<String> _createableContentStoreImplemenations = new ArrayList<String>();
     
     /**
-     * Returns the server UID
+     * Returns the databaseServer UID
      */
     public String getUid() {        
         return _uid;
     }
     /**
-     * * Sets the server UID
+     * * Sets the databaseServer UID
      */
     public void setUid(String uid) {
         _uid = uid;
     }
     /**
-     * Returns the server title
+     * Returns the databaseServer title
      */
     public String getTitle() {
         return _title;
     }
     /**
-     * Sets the server title
+     * Sets the databaseServer title
      */
     public void setTitle(String title) {
         _title = title;
     }
     /**
-     * Returns the server description
+     * Returns the databaseServer description
      */
     public String getDescription() {
         return _description;
     }
     /**
-     * Sets the server description
+     * Sets the databaseServer description
      */
     public void setDescription(String description) {
         _description = description;
     }
     /**
-     * Sets the list of database implementations createable on this server
+     * Sets the list of database implementations createable on this databaseServer
      */
     public void setCreateableContentStoreImplemenations(List<String> createableContentStoreImplemenations) {
         _createableContentStoreImplemenations = createableContentStoreImplemenations;
     }
     /**
-     * Returns the list of database implementations createable on this server
+     * Returns the list of database implementations createable on this databaseServer
      */
     public List<String> getCreateableContentStoreImplemenations() {
         return _createableContentStoreImplemenations;

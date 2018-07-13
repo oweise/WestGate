@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ public class DBServerScope implements ProblemScope, MessageVariableProvider {
     
     @Override
     public String toString() {
-        return "Database server: " + _serverId;
+        return "Database databaseServer: " + _serverId;
     }
     
     @Override

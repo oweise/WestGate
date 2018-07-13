@@ -29,7 +29,7 @@ public interface WGAServices {
 	
 
 	/**
-	 * Logs in to the WGA server and returns an object that represents a remote database session.
+	 * Logs in to the WGA databaseServer and returns an object that represents a remote database session.
 	 * @param domain The WGA domain to log in to
 	 * @param user The login user
 	 * @param pwd The login password
@@ -38,7 +38,7 @@ public interface WGAServices {
 	public RemoteSession login(String domain, String user, String pwd) throws WGAServiceException;
 	
 	/**
-     * Calls a remote action on the WGA server.
+     * Calls a remote action on the WGA databaseServer.
      * Since this method call is quite complex because of its numerous parameters it is often
      * more comfortable to use an {@link ActionCaller} instead.
      * @param session The session to use

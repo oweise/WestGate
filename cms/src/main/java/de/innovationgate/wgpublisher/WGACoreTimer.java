@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -233,7 +233,7 @@ public class WGACoreTimer {
             ProblemScope scope;
             if (poolBean.isServer()) {
                 scope = new DBServerScope(_core.getDatabaseServers().get(poolBean.getEntityKey()));
-                keyBase = "dbConnProblem.server";
+                keyBase = "dbConnProblem.databaseServer";
             }
             else {
                 scope = new DatabaseScope(poolBean.getEntityKey());

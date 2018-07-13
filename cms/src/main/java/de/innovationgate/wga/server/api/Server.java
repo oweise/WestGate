@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ import de.innovationgate.wgpublisher.problems.ProblemType;
 
 
 /**
- * This  provides information and services regarding the OpenWGA server runtime and installation
+ * This  provides information and services regarding the OpenWGA databaseServer runtime and installation
  */
 @CodeCompletion(methodMode=CodeCompletion.MODE_EXCLUDE)
 public class Server {
@@ -200,7 +200,7 @@ public class Server {
                         _error = e;
                     }
                     catch (Throwable e) {
-                        _error = new WGAServerException("Exception running server management task", e);
+                        _error = new WGAServerException("Exception running databaseServer management task", e);
                     }
                     finally {
                         WGFactory.getInstance().closeSessions();
@@ -214,7 +214,7 @@ public class Server {
                 t.join();
             }
             catch (InterruptedException e) {
-                throw new RuntimeException("Interrupted server management task", e);
+                throw new RuntimeException("Interrupted databaseServer management task", e);
             }
             
             if (_error != null) {
@@ -352,7 +352,7 @@ public class Server {
     
     
     /**
-     * Returns the application log logger of the server
+     * Returns the application log logger of the databaseServer
      */
     @CodeCompletion
     public Logger getLog() {
@@ -361,8 +361,8 @@ public class Server {
     
     /**
      * Returns the base URL to reach this OpenWGA runtime
-     * This is the base part of every OpenWGA URL that is necessary to address the OpenWGA server itself, without any extra path information that is used to address resources within OpenWGA. 
-     * It is an absolute URL which uses an "best effort" approach to serve a matching host name (as an OpenWGA server may listen to many hostnames). When in a normal WebTML environment running on behalf of a request then this URL uses the base URL information from that request. If not then it uses the configured root URL from WGA configuration.
+     * This is the base part of every OpenWGA URL that is necessary to address the OpenWGA databaseServer itself, without any extra path information that is used to address resources within OpenWGA.
+     * It is an absolute URL which uses an "best effort" approach to serve a matching host name (as an OpenWGA databaseServer may listen to many hostnames). When in a normal WebTML environment running on behalf of a request then this URL uses the base URL information from that request. If not then it uses the configured root URL from WGA configuration.
      * @throws WGAPIException
      */
     public String getBaseURL() throws WGException {
@@ -382,7 +382,7 @@ public class Server {
     
     /**
      * Returns the folder in which is used for WGA configuration
-     * Every OpenWGA installation uses a special folder for file data that is managed by the server itself. This contains files like the basic OpenWGA configuration file "wgaconfig.xml", the plugin management folder, folders for internally managed databases etc.
+     * Every OpenWGA installation uses a special folder for file data that is managed by the databaseServer itself. This contains files like the basic OpenWGA configuration file "wgaconfig.xml", the plugin management folder, folders for internally managed databases etc.
      */
     public File getConfigFolder() throws WGException {
         return new File(_wga.getCore().getConfigFilePath());
@@ -436,14 +436,14 @@ public class Server {
     }
     
     /**
-     * Returns the WGA server version
+     * Returns the WGA databaseServer version
      */
     public Version getVersion() throws WGException {
         return WGAVersion.toCsConfigVersion();
     }
 
     /**
-     * Reloads the server configuration
+     * Reloads the databaseServer configuration
      */
     @CodeCompletion
     public void reloadConfig() throws WGException {
@@ -451,7 +451,7 @@ public class Server {
     }
     
     /**
-     * Reloads the server configuration, reconnecting the databases belonging to the given config UIDs
+     * Reloads the databaseServer configuration, reconnecting the databases belonging to the given config UIDs
      * @param uidsToReconnect UIDs of config entities. Allowed are config UIDs of domains, database servers and content databases, also database keys.
      */
     @CodeCompletion
@@ -653,10 +653,10 @@ public class Server {
     }
     
     /**
-     * Reads a server option
-     * This method returns the server option value in its native data type, like determined in module registry.
-     * If the server option is not determined for this runtime this method will return the options default value from the module registry.  
-     * @param name Name of the server option
+     * Reads a databaseServer option
+     * This method returns the databaseServer option value in its native data type, like determined in module registry.
+     * If the databaseServer option is not determined for this runtime this method will return the options default value from the module registry.
+     * @param name Name of the databaseServer option
      * @return The native option value
      */
     public Object getServerOption(String name) {
@@ -692,21 +692,21 @@ public class Server {
     }
 
     /**
-     * Returns the default encoding used for HTTP communication on this server
+     * Returns the default encoding used for HTTP communication on this databaseServer
      */
     public String getDefaultHttpEncoding() {
         return _wga.getCore().getCharacterEncoding();
     }
     
     /**
-     * Returns if the server runs in development mode, so is likely started in OpenWGA developer studio
+     * Returns if the databaseServer runs in development mode, so is likely started in OpenWGA developer studio
      */
     public boolean isDevelopmentMode() {
         return WGACore.isDevelopmentModeEnabled();
     }
     
     /**
-     * Returns if the current server is a master node (either a standalone server or the master in a cluster)
+     * Returns if the current databaseServer is a master node (either a standalone databaseServer or the master in a cluster)
      * which should run operations that only one node in a cluster should perform  
      */
     public boolean isMasterNode() {

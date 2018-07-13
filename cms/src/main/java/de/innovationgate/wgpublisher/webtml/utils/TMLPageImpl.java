@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,7 +100,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#isAvailable()
+     * @see de.innovationgate.wga.databaseServer.api.Page#isAvailable()
      */
     @Override
     public boolean isAvailable() {
@@ -129,7 +129,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#prepareSocket()
+     * @see de.innovationgate.wga.databaseServer.api.Page#prepareSocket()
      */
     public boolean prepareWebSocket() throws WGException {
         return getOrCreatePageConnection() != null;
@@ -164,7 +164,7 @@ public class TMLPageImpl implements TMLPage {
     }
 
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#render(de.innovationgate.wga.server.api.Design)
+     * @see de.innovationgate.wga.databaseServer.api.Page#render(de.innovationgate.wga.databaseServer.api.Design)
      */
     @Override
     public void render(Design design) throws WGException {
@@ -172,7 +172,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#render(de.innovationgate.wga.server.api.Design, de.innovationgate.wga.server.api.tml.Context)
+     * @see de.innovationgate.wga.databaseServer.api.Page#render(de.innovationgate.wga.databaseServer.api.Design, de.innovationgate.wga.databaseServer.api.tml.Context)
      */
     @Override
     public void render(Design design, Context cx) throws WGException {
@@ -180,7 +180,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#render(de.innovationgate.wga.server.api.Design, java.lang.String)
+     * @see de.innovationgate.wga.databaseServer.api.Page#render(de.innovationgate.wga.databaseServer.api.Design, java.lang.String)
      */
     @Override
     public void render(Design design, String mediaKey) throws WGException {
@@ -193,7 +193,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#renderDefault()
+     * @see de.innovationgate.wga.databaseServer.api.Page#renderDefault()
      */
     @Override
     public void renderDefault(Map<Object,Object> options) throws WGException {
@@ -211,7 +211,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#render(de.innovationgate.wga.server.api.Design, java.lang.String, de.innovationgate.wga.server.api.tml.Context)
+     * @see de.innovationgate.wga.databaseServer.api.Page#render(de.innovationgate.wga.databaseServer.api.Design, java.lang.String, de.innovationgate.wga.databaseServer.api.tml.Context)
      */
     @Override
     public void render(Design design, String mediaKey, Context cx, Map<Object,Object> options) throws WGException {
@@ -518,7 +518,7 @@ public class TMLPageImpl implements TMLPage {
     }
 
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#write(java.lang.String)
+     * @see de.innovationgate.wga.databaseServer.api.Page#write(java.lang.String)
      */
     @Override
     public void write(final String out) throws WGException, IOException {
@@ -549,7 +549,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#write(byte[])
+     * @see de.innovationgate.wga.databaseServer.api.Page#write(byte[])
      */
     @Override
     public void write(byte[] out) throws WGException, IOException {
@@ -560,7 +560,7 @@ public class TMLPageImpl implements TMLPage {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.Page#write(byte)
+     * @see de.innovationgate.wga.databaseServer.api.Page#write(byte)
      */
     @Override
     public void write(byte out) throws WGException, IOException {

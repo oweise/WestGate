@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ public class HTTPProblemType implements ProblemType, UseSpecialProblemImplementa
 
     @Override
     public String getDescription(Locale l) {
-        return "URL Paths which are called on this OpenWGA server but could not be served";
+        return "URL Paths which are called on this OpenWGA databaseServer but could not be served";
     }
 
     @Override

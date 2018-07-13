@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -5251,7 +5251,7 @@ public class TMLContext implements TMLObject, de.innovationgate.wga.server.api.t
 
     public PortletEvent fetchRequestPortletEvent() {
         
-        // Event originally thrown from server
+        // Event originally thrown from databaseServer
         String eventIdxStr = getrequest().getParameter("$portletEvent");
         if (!WGUtils.isEmpty(eventIdxStr)) {
             Long eventIdx = Long.parseLong(eventIdxStr);

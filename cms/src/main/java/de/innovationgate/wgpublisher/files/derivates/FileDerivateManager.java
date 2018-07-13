@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -931,14 +931,14 @@ public class FileDerivateManager {
 
     public void updateAllDerivates(WGDatabase db) throws WGAPIException {
         if (_updateProcess == null) {
-            throw new IllegalStateException("This operation must be performed from the server on which the derivate update process runs");
+            throw new IllegalStateException("This operation must be performed from the databaseServer on which the derivate update process runs");
         }
         resetDerivateStatus(db);
     }
     
     public void updateDerivatesOfCreators(WGDatabase db, final List<String> creators) throws Exception {
         if (_updateProcess == null) {
-            throw new IllegalStateException("This operation must be performed from the server on which the derivate update process runs");
+            throw new IllegalStateException("This operation must be performed from the databaseServer on which the derivate update process runs");
         }
         
         synchronized (getDatabaseStatus(db).updateMonitor) {

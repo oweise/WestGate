@@ -69,7 +69,7 @@ public class ClientFactory {
 	
     /**
      * Creates a client for core services
-     * @param wgaRootURL The root url of the OpenWGA server
+     * @param wgaRootURL The root url of the OpenWGA databaseServer
      * @return A services client
      * @throws MalformedURLException
      * @throws WGAServiceException
@@ -80,7 +80,7 @@ public class ClientFactory {
 	
 	/**
      * Creates a client for custom services
-     * @param wgaRootURL The root url of the OpenWGA server
+     * @param wgaRootURL The root url of the OpenWGA databaseServer
      * @return A services client
      * @throws MalformedURLException
      * @throws WGAServiceException
@@ -91,7 +91,7 @@ public class ClientFactory {
 	
 	/**
 	 * Creates a client for core services
-	 * @param wgaRootURL The root url of the OpenWGA server
+	 * @param wgaRootURL The root url of the OpenWGA databaseServer
 	 * @param properties Properties passed to the client factory service
 	 * @return A services client
 	 * @throws MalformedURLException
@@ -103,7 +103,7 @@ public class ClientFactory {
 	
 	/**
      * Creates a client for custom services
-     * @param wgaRootURL The root url of the OpenWGA server
+     * @param wgaRootURL The root url of the OpenWGA databaseServer
      * @param properties Properties passed to the client factory service
      * @return A services client
      * @throws MalformedURLException
@@ -114,10 +114,10 @@ public class ClientFactory {
 	}
 	
     /**
-     * Creates a helper object for calling remote actions on a WGA server.
-     * An ActionCaller object can be used to call remote actions that are stored on a specific db on the WGA server.
+     * Creates a helper object for calling remote actions on a WGA databaseServer.
+     * An ActionCaller object can be used to call remote actions that are stored on a specific db on the WGA databaseServer.
      * @param services The WGAServices object that the caller will use
-     * @param session The remote session that the caller will need to login to the server
+     * @param session The remote session that the caller will need to login to the databaseServer
      * @param db The database whose actions are to be called
      * @return An action caller object
      */

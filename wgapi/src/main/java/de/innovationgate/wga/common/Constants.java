@@ -103,7 +103,7 @@ public abstract class Constants {
     /**
      * RegEx pattern for valid synchronisation filenames
      */
-    public static final Pattern PATTERN_FILENAMES = Pattern.compile("[a-zA-Z0-9_\\.\\-\\: öäüÖÄÜß\\$\\(\\)]+");
+    public static final Pattern PATTERN_FILENAMES = Pattern.compile("[a-zA-Z0-9_\\.\\-\\: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\\$\\(\\)]+");
     /**
      * RegEx pattern for valid design keys
      */
@@ -128,7 +128,7 @@ public abstract class Constants {
     // Names of the default design collections
     public static final String DESIGNCOL_DB = "db";
     public static final String DESIGNCOL_PLUGIN = "plugin";
-    public static final String DESIGNCOL_FILESYSTEM = "fs-designs";
+    public static final String DESIGNCOL_FILESYSTEM = "fs";
     
     // Modes of warnings output on page
     public static final String WARNINGS_TML_AS_HTML = "html";

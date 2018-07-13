@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import de.innovationgate.wgpublisher.WGACore;
 
 /**
  * The "Plugin" object provides information about an installed OpenWGA plugin
- * OpenWGA plugins extend the OpenWGA server in numerous ways, including new application designs, TMLScript functionalities, authentication sources and many more. This is an information object about the data and state of an installed and active OpenWGA plugin.
+ * OpenWGA plugins extend the OpenWGA databaseServer in numerous ways, including new application designs, TMLScript functionalities, authentication sources and many more. This is an information object about the data and state of an installed and active OpenWGA plugin.
  */
 @CodeCompletion(methodMode=CodeCompletion.MODE_EXCLUDE)
 public class Plugin extends App {

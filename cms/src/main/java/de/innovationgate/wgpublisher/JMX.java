@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -124,7 +124,7 @@ public class JMX {
             }
         }
         catch (UnsupportedOperationException e) {
-            _core.getLog().info("WGA JMX metrics disabled because no JMX MBean server available");
+            _core.getLog().info("WGA JMX metrics disabled because no JMX MBean databaseServer available");
         }
         catch (ClassNotFoundException e) {
             _core.getLog().warn("WGA JMX metrics are not enabled since the neccessary API is not available");
@@ -150,7 +150,7 @@ public class JMX {
                 catch (MalformedURLException e) {
                     Problem problem = Problem.create(JMXProblemOccasion.INSTANCE, "JMXFailed.invalidRootURL", ProblemSeverity.HIGH, Problem.var("rooturl", rootURL));
                     _core.getProblemRegistry().addProblem(problem);
-                    _core.getLog().error("Cannot use configured root URL to build JMX URL: " + rootURL + ". Specify correct root URL in OpenWGA configuration or specify an explicit host for the JMX server.", e);
+                    _core.getLog().error("Cannot use configured root URL to build JMX URL: " + rootURL + ". Specify correct root URL in OpenWGA configuration or specify an explicit host for the JMX databaseServer.", e);
                     return;
                 }
             }
@@ -185,23 +185,23 @@ public class JMX {
             try {
                 _core.logCategoryInfo("JMX", 1);
                 JMXServiceURL url = new JMXServiceURL("service:jmx:rmi://" + hostName + ":" + servicePort + "/jndi/rmi://" + hostName + ":" + registryPort + "/jmxrmi");
-                _core.getLog().info("Starting integrated JMX server under URL: " + url.toString());
+                _core.getLog().info("Starting integrated JMX databaseServer under URL: " + url.toString());
                 
                 // Create the custom JMX Server
                 
                 // Ensure cryptographically strong random number generator used
-                // to choose the object number - see java.rmi.server.ObjID
+                // to choose the object number - see java.rmi.databaseServer.ObjID
                 //
-                System.setProperty("java.rmi.server.randomIDs", "true");
+                System.setProperty("java.rmi.databaseServer.randomIDs", "true");
                 
                 // Set the configured hostname
-                String rmiHost = System.getProperty("java.rmi.server.hostname", "localhost");
+                String rmiHost = System.getProperty("java.rmi.databaseServer.hostname", "localhost");
                 if (!hostName.equals(rmiHost)) {
                     if (hostName.equals("localhost")) {
-                        System.clearProperty("java.rmi.server.hostname");
+                        System.clearProperty("java.rmi.databaseServer.hostname");
                     }
                     else {
-                        System.setProperty("java.rmi.server.hostname", hostName);
+                        System.setProperty("java.rmi.databaseServer.hostname", hostName);
                     }
                 }
     
@@ -219,7 +219,7 @@ public class JMX {
                 // Provide SSL-based RMI socket factories.
                 //
                 // The protocol and cipher suites to be enabled will be the ones
-                // defined by the default JSSE implementation and only server
+                // defined by the default JSSE implementation and only databaseServer
                 // authentication will be required.
                 //
                 
@@ -272,7 +272,7 @@ public class JMX {
                 };
                 env.put(JMXConnectorServer.AUTHENTICATOR, authenticator);
     
-                // Create an RMI connector server.
+                // Create an RMI connector databaseServer.
                 _integratedJmxServer = JMXConnectorServerFactory.newJMXConnectorServer(url, env, mbs);
                 _integratedJmxServer.start();
                 
@@ -296,14 +296,14 @@ public class JMX {
 
     protected void shutdown() {
 
-        _core.getLog().info("Shutting down integrated JMX server");
+        _core.getLog().info("Shutting down integrated JMX databaseServer");
         
         if (_integratedJmxServer != null) {
             try {
                 _integratedJmxServer.stop();
             }
             catch (IOException e) {
-                _core.getLog().error("Exception stopping integrated JMX server", e);
+                _core.getLog().error("Exception stopping integrated JMX databaseServer", e);
             }
             _integratedJmxServer = null;
         }
@@ -315,7 +315,7 @@ public class JMX {
                 Thread.sleep(3000);
             }
             catch (Exception e) {
-                _core.getLog().error("Exception stopping RMI registry of integrated JMX server", e);
+                _core.getLog().error("Exception stopping RMI registry of integrated JMX databaseServer", e);
             }
             _integratedJmxRegistry = null;
         }

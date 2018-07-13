@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -976,7 +976,7 @@ public class Design {
     }
     
     /**
-     * Returns the WebTML design context behind this server API design context
+     * Returns the WebTML design context behind this databaseServer API design context
      */
     @CodeCompletion
     public TMLDesignContext getDesignContext() throws WGException {

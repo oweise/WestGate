@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ public class IndexingRuleBasedQueryParser extends MultiFieldQueryParser {
      * 
      * @param arg0 - the default field for query terms.
      * @param arg1 - analyzer used to find terms in the query text.
-     * @param luceneConfigurations - map with luceneConfigurations for dbs (key=dbKey, value=LuceneConfiguration)
+     * @param luceneConfigurations - map with luceneConfigurations for dbs (key=key, value=LuceneConfiguration)
      * @param searchDBKeys - list of dbkeys (Strings) to search
      * @param metaKeywordFields - set of metaFields (String fieldname) indexed as keyword
      */

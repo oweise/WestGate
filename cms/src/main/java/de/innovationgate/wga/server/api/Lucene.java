@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -294,7 +294,7 @@ public class Lucene {
      * The highlighting data will be automatically cleared on the following conditions:
      * <ul>
      * <li> Another lucene query with activated highlighting is executed
-     * <li> The users session is invalidated by the JavaEE server
+     * <li> The users session is invalidated by the JavaEE databaseServer
      * </ul>
      */
     public void removeQuery() throws WGException {

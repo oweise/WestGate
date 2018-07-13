@@ -62,7 +62,7 @@ public class RestServiceModuleDefinition implements ModuleDefinition, KeyBasedMo
                     
                     WGAServiceServletConfig cfg = super.buildServletConfig(servletContext, modDef);
 //                    cfg.setInitParameter("api.version", "1.0.0");
-//                    cfg.setInitParameter("swagger.api.basepath", wga.server().getBaseURL() + "/services/rest/v1");
+//                    cfg.setInitParameter("swagger.api.basepath", wga.databaseServer().getBaseURL() + "/services/rest/v1");
                     return cfg;
 //                }
 //                catch (WGException e) {

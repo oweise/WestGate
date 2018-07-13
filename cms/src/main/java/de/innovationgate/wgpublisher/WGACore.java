@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,6 +82,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -190,6 +191,7 @@ import de.innovationgate.webgate.api.modules.servers.DatabaseServerProperties;
 import de.innovationgate.webgate.api.servers.WGDatabaseServer;
 import de.innovationgate.webgate.api.utils.ContentStoreDumpManager;
 import de.innovationgate.webgate.api.workflow.WGDefaultWorkflowEngine;
+import de.innovationgate.westgate.WestGateSetup;
 import de.innovationgate.wga.common.Constants;
 import de.innovationgate.wga.common.beans.csconfig.v1.CSConfig;
 import de.innovationgate.wga.common.beans.csconfig.v1.ElementMapping;
@@ -667,14 +669,14 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
                 return getWgaConfiguration().getCachingOptionReader().readOptionValueOrDefault(options, optionName, modDef);
             }
             catch (OptionConversionException e) {
-                getLog().error("Exception reading server option '" + optionName + "'. Falling back to default", e);
+                getLog().error("Exception reading databaseServer option '" + optionName + "'. Falling back to default", e);
                 OptionDefinition optDef = modDef.getOptionDefinitions().get(optionName);
                 if (optDef != null) {
                     try {
                         return OptionReader.unconvertOptionValue(optDef, optDef.getDefaultValue());
                     }
                     catch (OptionConversionException e1) {
-                        getLog().error("Exception unconverting default value of server option '" + optionName + "'. Falling back to null", e);
+                        getLog().error("Exception unconverting default value of databaseServer option '" + optionName + "'. Falling back to null", e);
                     }
                 }
 
@@ -1760,14 +1762,14 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
             // retrieve dbserver for db
             WGDatabaseServer server = getDatabaseServers().get(config.getDbServer());
             if (server == null) {
-                throw Problem.create(occ, "databaseConnectionFailed.unknownServer", ProblemSeverity.HIGH, Problem.var("server", config.getDbServer()));
+                throw Problem.create(occ, "databaseConnectionFailed.unknownServer", ProblemSeverity.HIGH, Problem.var("databaseServer", config.getDbServer()));
             }
              
             if (strKey.equalsIgnoreCase("start") || strKey.equalsIgnoreCase("bi") || strKey.equalsIgnoreCase("static") || strKey.equalsIgnoreCase("statictml") || strKey.startsWith(PluginConfig.PLUGIN_DBKEY_PREFIX)) {
                 throw Problem.create(occ, "databaseConnectionFailed.invalidDbkey", ProblemSeverity.HIGH);
             }
             
-            // Look if the server is able and allowed to instantiate this db type
+            // Look if the databaseServer is able and allowed to instantiate this db type
             Class<WGDatabaseCore> typeClass;
             try {
                 Class theClass = WGFactory.getImplementationLoader().loadClass(strType);
@@ -1820,7 +1822,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
             Domain domainCfg = getWgaConfiguration().getDomain(config.getDomain());
             WGADomain domain = getDomain(domainCfg);
     
-            // Collect db options from global, server, database
+            // Collect db options from global, databaseServer, database
             HashMap<String, String> dbOptions = new HashMap<String, String>();
             putDefaultDbOptions(dbOptions);
             dbOptions.putAll(_wgaConfiguration.getGlobalDatabaseOptions());
@@ -1961,7 +1963,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
                     throw Problem.create(occ, "databaseConnectionFailed.invalidDesign", ProblemSeverity.HIGH, e);
                 }
                         
-                // Merge publisher options from global, server, design, database
+                // Merge publisher options from global, databaseServer, design, database
                 Map<String, String> publisherOptions = new HashMap<String, String>();
                 publisherOptions.putAll(_wgaConfiguration.getGlobalPublisherOptions());
                 if (scContext != null) {
@@ -2214,13 +2216,13 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
             return null;
         }
 
-        // Retrieve server
+        // Retrieve databaseServer
         WGDatabaseServer server = getDatabaseServers().get(config.getDbServer());
         if (server == null) {
             throw Problem.create(new UpdateConfigOccasion(), new DomainScope(domainConfig.getName()), "updateConfigProblem.domainPersServerUnknown", ProblemSeverity.HIGH, Problem.var("serverid", config.getDbServer()));
         }
         
-        // Merge db options from global, server, database
+        // Merge db options from global, databaseServer, database
         HashMap<String, String> dbOptions = new HashMap<String, String>();
         putDefaultDbOptions(dbOptions);
         dbOptions.putAll(_wgaConfiguration.getGlobalDatabaseOptions());
@@ -3600,13 +3602,13 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
     /**
      * Directory from where to load wga configuration, defaults to the user's home directory. Many other locations are used relative to this path by default.
      */
-    public static final String SYSPROPERTY_CONFIGPATH = "de.innovationgate.wga.configpath";
+    public static final String SYSPROPERTY_CONFIGPATH = "de.bannkreis.westgate.configpath";
 
 
     /**
      * Directory where WGA can store management data, defaults to CONFIPATH/wgadata
      */
-    public static final String SYSPROPERTY_DATAPATH = "de.innovationgate.wga.datapath";
+    public static final String SYSPROPERTY_DATAPATH = "de.innovationgate.westgate.datapath";
     
     
     /**
@@ -3689,14 +3691,14 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
 
     private static final String SYSPROPERTY_QUARTZ_THREADPRIORITY = "de.innovationgate.wga.quartz.threadpriority";
 
-    private static final String DEFAULT_CONFIG_DIR = "WGA";
+    private static final String DEFAULT_CONFIG_DIR = ".westgate";
 
     public void onStartup(@Observes @Initialized(ApplicationScoped.class) Object initHook) {
-        getLog().info("Starting CMS on server startup");
+        getLog().info("Started CMS with databaseServer startup");
     }
 
     @Inject
-    public void WGACore(WGAConfiguration wgaConfiguration) throws ServletException {
+    public void WGACore(WestGateSetup westGateSetup) throws ServletException {
         try {
             INSTANCE = this;
 
@@ -3757,6 +3759,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
 
             this.configPath = retrieveConfigPath();
             File configPathDir = new File(configPath);
+            getLog().info("Config path is: " + configPathDir.getAbsolutePath());
             // init DES-Encrypter
             File desKeyFile = new File(configPath, "des.key");
             desEncrypter = new DESEncrypter();
@@ -3767,7 +3770,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
                 }
                 catch (DESEncrypter.PersistentKeyException e) {
                     log.warn(
-                            "Unable to create or restore encryption key - generating temporary key. Session replication will not work with this key. Ensure the application server has read/write access to '"
+                            "Unable to create or restore encryption key - generating temporary key. Session replication will not work with this key. Ensure the application databaseServer has read/write access to '"
                                     + desKeyFile.getPath() + "'.", e);
                     // init with temp key
                     desEncrypter.init();
@@ -3809,7 +3812,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
                 throw new ServletException("Unable to init symmetric encryption engine", e);
             }
 
-            this._wgaConfiguration = wgaConfiguration;
+            this._wgaConfiguration = westGateSetup.buildWgaConfig();
             adaptWGAConfigurationToVersion();
                 
             initQuartz();
@@ -3898,7 +3901,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
             // fire pre connect event
             fireCoreEvent(new WGACoreEvent(WGACoreEvent.TYPE_STARTUP_PRE_CONNECT, null, this));
 
-            // Create server option readers
+            // Create databaseServer option readers
             _variousServerOptionReader = getConfigOptionReader(new OptionFetcher() {
                 @Override
                 public Map<String, String> fetch(WGAConfiguration config) {
@@ -3990,7 +3993,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
             _externalFileMaintenanceTask = new ExternalFileServingMaintenanceTask(this);
             _externalFileMaintenanceTask.start();
             
-            // Setup integrated JMX server
+            // Setup integrated JMX databaseServer
             _jmx.setup();
             
             // Start timer tasks
@@ -4320,11 +4323,11 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
     }
 
 
-    public static String retrieveConfigPath() throws IOException {
+    public String retrieveConfigPath() throws IOException {
         String configFilePath = System.getProperty(WGACore.SYSPROPERTY_CONFIGPATH);
         if (WGUtils.isEmpty(configFilePath)) {
-            String userHome = System.getProperty("user.home");
-            File defaultConfigDir = new File(userHome, DEFAULT_CONFIG_DIR);
+            String userHome = System.getProperty("user.dir");
+            File defaultConfigDir = new File(userHome);
             if (!defaultConfigDir.exists()) {
                 if (!defaultConfigDir.mkdirs()) {
                     throw new IOException("Unable to create default config directory " + defaultConfigDir.getPath());
@@ -4371,22 +4374,22 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
             ModuleDefinition serverDefinition = singletons.next();
             DatabaseServerProperties properties = (DatabaseServerProperties) serverDefinition.getProperties();
             if (properties == null) {
-                   getLog().error("Database server type '" + serverDefinition.getTitle(Locale.getDefault()) + "' (" + serverDefinition.getImplementationClass().getName() + ") is invalid, misses neccessary properties definition");
+                   getLog().error("Database databaseServer type '" + serverDefinition.getTitle(Locale.getDefault()) + "' (" + serverDefinition.getImplementationClass().getName() + ") is invalid, misses neccessary properties definition");
             }
             else if (properties.isSingleton()) {
                 try {
                     serverDefinition.testDependencies();
                     WGDatabaseServer server = (WGDatabaseServer) getModuleRegistry().instantiate(serverDefinition);
-                    server.init(WGAConfiguration.SINGLETON_SERVER_PREFIX + server.getClass().getName(), null, new HashMap<String,String>());
+                    server.init(properties.getSingletonUID(), null, new HashMap<String,String>());
                     newServers.put(server.getUid(), server);
-                    getLog().info("Registering database server '" + server.getTitle(Locale.getDefault()) + "' (Automatically created)");
+                    getLog().info("Registering database databaseServer '" + server.getTitle(Locale.getDefault()) + "' (Automatically created)");
                 }
                 catch (ModuleDependencyException e) {
-                    getLog().error("Database server " + serverDefinition.getTitle(Locale.getDefault()) + " deactivated in current WGA runtime: " + e.getMessage());
+                    getLog().error("Database databaseServer " + serverDefinition.getTitle(Locale.getDefault()) + " deactivated in current WGA runtime: " + e.getMessage());
                     getProblemRegistry().addProblem(Problem.create(new UpdateConfigOccasion(), new DBServerScope(properties), "updateConfigProblem.serverMissingDependencies", ProblemSeverity.HIGH, Problem.var("msg", e.getMessage()), e));
                 }
                 catch (Exception e) {
-                    getLog().error("Exception instantiating database server", e);
+                    getLog().error("Exception instantiating database databaseServer", e);
                     getProblemRegistry().addProblem(Problem.create(new UpdateConfigOccasion(), new DBServerScope(properties), "updateConfigProblem.serverException", ProblemSeverity.HIGH, e));
                 }
             }
@@ -4411,14 +4414,14 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
                     serverOptions.putAll(databaseServer.getOptions());
                     server.init(databaseServer.getUid(), databaseServer.getTitle(), serverOptions);
                     newServers.put(server.getUid(), server);
-                    getLog().info("Registering database server '" + server.getTitle(Locale.getDefault()) + "'");
+                    getLog().info("Registering database databaseServer '" + server.getTitle(Locale.getDefault()) + "'");
                 }
                 catch (ModuleDependencyException e) {
-                    getLog().error("Database server " + databaseServer.getTitle() + " deactivated in current WGA runtime: " + e.getMessage());
+                    getLog().error("Database databaseServer " + databaseServer.getTitle() + " deactivated in current WGA runtime: " + e.getMessage());
                     getProblemRegistry().addProblem(Problem.create(new UpdateConfigOccasion(), new DBServerScope(databaseServer), "updateConfigProblem.serverMissingDependencies", ProblemSeverity.HIGH, Problem.var("msg", e.getMessage()), e));
                 }
                 catch (Exception e) {
-                    getLog().error("Exception instantiating database server", e);
+                    getLog().error("Exception instantiating database databaseServer", e);
                     getProblemRegistry().addProblem(Problem.create(new UpdateConfigOccasion(), new DBServerScope(databaseServer), "updateConfigProblem.serverException", ProblemSeverity.HIGH, e));
                 }
             }
@@ -4512,7 +4515,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
         }
         _moduleRegistry.getContextObjects().put(PasswordEncodingType.class, encoder);
 
-       // Add mandatory server options
+       // Add mandatory databaseServer options
        Map<String,String> serverOptions = this._wgaConfiguration.getServerOptions();
        for (ModuleDefinition modDef : _moduleRegistry.getModulesForType(WGAServerOptionsModuleType.class).values()) {
             for (OptionDefinition optDef : modDef.getOptionDefinitions().values()) {
@@ -4533,7 +4536,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
         
         Iterator<ModuleDefinition> serverMods =  _moduleRegistry.getModulesForType(DatabaseServerModuleType.class).values().iterator();
         if (serverMods.hasNext()) {
-            logCategoryInfo("Database server types available in this runtime", 2);
+            logCategoryInfo("Database databaseServer types available in this runtime", 2);
             while (serverMods.hasNext()) {
                 ModuleDefinition moduleDefinition = serverMods.next();
                 try {
@@ -5392,7 +5395,7 @@ public class WGACore implements WGDatabaseConnectListener, ScopeProvider, ClassL
                     
                     WGDatabaseServer server = getDatabaseServers().get(serverId); // Registered servers
                     if (server == null) {
-                        getLog().info("Clearing problem registry scope for database server with id '" + serverId + "'");
+                        getLog().info("Clearing problem registry scope for database databaseServer with id '" + serverId + "'");
                         getProblemRegistry().clearProblemScope(scope);
                     }
                 }
@@ -7612,7 +7615,7 @@ private void fireConfigEvent(WGAConfigurationUpdateEvent event) {
                 return OptionReader.unconvertOptionValue(optionDef, value);
             }
             catch (Exception e) {
-                throw new RuntimeException("Exception unconverting server option '" + name + "' with value '" + value + "'", e);
+                throw new RuntimeException("Exception unconverting databaseServer option '" + name + "' with value '" + value + "'", e);
             }
                   
         }
@@ -7648,6 +7651,8 @@ private void fireConfigEvent(WGAConfigurationUpdateEvent event) {
         return _status;
     }
 
+    @Produces
+    @ApplicationScoped
 	public WGAConfiguration getWgaConfiguration() {
 		return _wgaConfiguration;
 	}

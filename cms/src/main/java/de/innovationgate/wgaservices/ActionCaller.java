@@ -22,8 +22,8 @@ import de.innovationgate.wgaservices.types.Form;
 import de.innovationgate.wgaservices.types.RemoteSession;
 
 /**
-* A helper object for calling remote actions on a WGA server.
-* An ActionCaller object can be used to call remote actions that are stored on a specific db on the WGA server. 
+* A helper object for calling remote actions on a WGA databaseServer.
+* An ActionCaller object can be used to call remote actions that are stored on a specific db on the WGA databaseServer.
 * If the database hosts a design configuration (File "csconfig.xml" in file container "system") we can only call actions
 * that are declared as remote actions in it.<br>
 * If it does not we need access level DESIGNER on the database to call any action as remote action.<br>

@@ -34,6 +34,27 @@
         </executions>
 
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-cms-data</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/cms</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/cms</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -69,12 +90,17 @@
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
+      <artifactId>microprofile-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
       <artifactId>ejb</artifactId>
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>infinispan</artifactId>
     </dependency>
+
 
     <!-- WestGate -->
     <dependency>
@@ -90,7 +116,6 @@
       <!--<version>1.2.6</version>-->
       <!--<type>pom</type>-->
     <!--</dependency>-->
-
 
   </dependencies>
 

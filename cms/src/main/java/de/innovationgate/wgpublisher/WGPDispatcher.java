@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -602,7 +602,7 @@ public class WGPDispatcher extends HttpServlet {
                 request.getSession().setAttribute(sessionKey, formData);
 
                 if (request.getSession().isNew()) {
-                    // server create new session in an ajax form call
+                    // databaseServer create new session in an ajax form call
                     // set flag on session and later render
                     // Event.SESSION_IS_NEW_EVENT
                     // in ajax call to notify client
@@ -2308,7 +2308,7 @@ public class WGPDispatcher extends HttpServlet {
     }
 
     /**
-     * Determine lastModified for a publishing file, respecting also changes of server output and design encoding 
+     * Determine lastModified for a publishing file, respecting also changes of databaseServer output and design encoding
        Last modified of binary response depends only on resource change date.
        Last change date of textual response additionally depends on character encoding change date.
      * @param publishingFile

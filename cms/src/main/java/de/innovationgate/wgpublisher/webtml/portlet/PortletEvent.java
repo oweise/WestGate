@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -74,7 +74,7 @@ public class PortletEvent implements Serializable {
     // Contains the name of the portlet which fired this event
     private String _sourceName;
     
-    // May contain a target portlet key to let this (server side) event solely effect that portlet 
+    // May contain a target portlet key to let this (databaseServer side) event solely effect that portlet
     private String _targetPortletKey = null;
        
     private Map<String,Object> _parameters;

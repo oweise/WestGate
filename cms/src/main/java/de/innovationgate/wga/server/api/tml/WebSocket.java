@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ import de.innovationgate.webgate.api.WGException;
 import de.innovationgate.wga.common.CodeCompletion;
 
 /**
- * A server-side Websocket endpoint, used to communicate with Websocket client
+ * A databaseServer-side Websocket endpoint, used to communicate with Websocket client
  */
 @CodeCompletion(methodMode=CodeCompletion.MODE_EXCLUDE)
 public interface WebSocket {

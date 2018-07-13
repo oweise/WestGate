@@ -34,8 +34,8 @@ import de.innovationgate.wgaservices.types.Version;
 public interface WGACoreServices extends WGAServices {
 
     /**
-     * Logs in to the WGA server as WGA administrator.
-     * An administrator login can do all tasks on the server under master login.
+     * Logs in to the WGA databaseServer as WGA administrator.
+     * An administrator login can do all tasks on the databaseServer under master login.
      * Usage of an administrator login is restricted to the administrative port if that is configured.
      * @param user The administrator user
      * @param pwd The administrator password
@@ -118,7 +118,7 @@ public interface WGACoreServices extends WGAServices {
     public List<DatabaseServerInfo> retrieveContentStoreDatabaseServers(RemoteSession session) throws WGAServiceException;
     
     /**
-     * creates a content store on the given database server with the given name
+     * creates a content store on the given database databaseServer with the given name
      * this operation will only create the database and not modify the OpenWGA configuration
      * @param session
      * @param dbServerInfo
@@ -130,7 +130,7 @@ public interface WGACoreServices extends WGAServices {
             Map<String, String> options) throws WGAServiceException;
 
     /**
-     * imports the given content store dump in the database specified by dbKey
+     * imports the given content store dump in the database specified by key
      * @param session
      * @param dbKey
      * @throws WGAServiceException
@@ -147,7 +147,7 @@ public interface WGACoreServices extends WGAServices {
     public DataSource createContentStoreDump(RemoteSession session, String dbKey, boolean includeACL) throws WGAServiceException;
 
     /**
-     * imports the given content store dump in the database specified by dbKey
+     * imports the given content store dump in the database specified by key
      * @param session
      * @param dbKey
      * @param includeACL
@@ -169,7 +169,7 @@ public interface WGACoreServices extends WGAServices {
             boolean includeSystemAreas) throws WGAServiceException;
 
     /**
-     * retrieves a list of available databases on given server with given type
+     * retrieves a list of available databases on given databaseServer with given type
      * @param session
      * @param dbServerInfo
      * @param implClassName

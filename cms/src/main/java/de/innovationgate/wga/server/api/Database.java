@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -132,7 +132,7 @@ public class Database {
     
     /**
      * Performs a "native" query on the database without any options and parameter.
-     * This method is the WGA server API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameter "query" is equal to the contents of the query tag.
+     * This method is the WGA databaseServer API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameter "query" is equal to the contents of the query tag.
      * The queryType for this query is taken from db attribute DBATTRIB_QUERY_DEFAULT (as in <tml:query>) - normaly "native".
      * @param queryString The actual query to execute
      * @throws WGException
@@ -143,7 +143,7 @@ public class Database {
 
     /**
      * Performs a "native" query on the database
-     * This method is the WGA server API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
+     * This method is the WGA databaseServer API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
      * The queryType for this query defaults to db attribute DBATTRIB_QUERY_DEFAULT (as in <tml:query>) - normaly "native".
      * The map argument "options" uses the names of other <tml:query>-Attributes as keys and interprets them the same way. So filling it with an entry of key "max" and a value 100 will have the same effect as specifying attribute max="100" on a query tag. Specifying or omitting an attribute here has the same effect as it would have on <tml:query>.
      * @param queryString The actual query to execute
@@ -179,7 +179,7 @@ public class Database {
 
     /**
      * Performs a query on the database
-     * This method is the WGA server API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
+     * This method is the WGA databaseServer API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
      * The map argument "attributes" uses the names of other <tml:query>-Attributes as keys and interprets them the same way. So filling it with an entry of key "max" and a value 100 will have the same effect as specifying attribute max="100" on a query tag. Specifying or omitting an attribute here has the same effect as it would have on <tml:query>.
      * The map argument "queryParams" takes query parameters that in WebTML you would add to the query by using <tml:param>. Specify parameter names as keys and parameter values as values.
      * The argument "context" determines the WebTML context for which the query runs, which is important for some query types like "lucene" or "hdbmodel:*".
@@ -193,7 +193,7 @@ public class Database {
     
     /**
      * Performs a query on the database
-     * This method is the WGA server API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
+     * This method is the WGA databaseServer API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
      * The map argument "atts" uses the names of other <tml:query>-Attributes as keys and interprets them the same way. So filling it with an entry of key "max" and a value 100 will have the same effect as specifying attribute max="100" on a query tag. Specifying or omitting an attribute here has the same effect as it would have on <tml:query>.
      * This uses the WebTML context of the environment as query context.
      * @param queryType The type of query to execute
@@ -207,7 +207,7 @@ public class Database {
 
     /**
      * Performs a query on the database
-     * This method is the WGA server API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
+     * This method is the WGA databaseServer API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
      * The map argument "atts" uses the names of other <tml:query>-Attributes as keys and interprets them the same way. So filling it with an entry of key "max" and a value 100 will have the same effect as specifying attribute max="100" on a query tag. Specifying or omitting an attribute here has the same effect as it would have on <tml:query>.
      * The map argument "queryParams" takes query parameters that in WebTML you would add to the query by using <tml:param>. Specify parameter names as keys and parameter values as values.
      * This uses the WebTML context of the environment as query context.
@@ -223,7 +223,7 @@ public class Database {
     
     /**
      * Performs a query on the database
-     * This method is the WGA server API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
+     * This method is the WGA databaseServer API pendant to WebTML tag <tml:query> and works quite equal. The mandatory parameters "queryType" and "query" are equal to attribute "type" and the contents of the query tag.
      * The map argument "atts" uses the names of other <tml:query>-Attributes as keys and interprets them the same way. So filling it with an entry of key "max" and a value 100 will have the same effect as specifying attribute max="100" on a query tag. Specifying or omitting an attribute here has the same effect as it would have on <tml:query>.
      * The map argument "queryParams" takes query parameters that in WebTML you would add to the query by using <tml:param>. Specify parameter names as keys and parameter values as values.
      * The argument "context" determines the WebTML context for which the query runs, which is important for some query types like "lucene" or "hdbmodel:*".

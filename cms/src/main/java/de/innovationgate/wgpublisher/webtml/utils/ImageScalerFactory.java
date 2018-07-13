@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ public class ImageScalerFactory {
     
     /**
      * Creates an image scaler specifically for the given mime type.
-     * This iterates over all available {@link MimeTypeSpecificImageScalerFactory} (while preferring the one that is configured as default on server configuration), trying to find a factory able to serve a scaler for the given type.
+     * This iterates over all available {@link MimeTypeSpecificImageScalerFactory} (while preferring the one that is configured as default on databaseServer configuration), trying to find a factory able to serve a scaler for the given type.
      * Returns null if none if found.
      * @param core The WGA core
      * @param mimeType The mime type

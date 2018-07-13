@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ public class LuceneIndexConfiguration {
     
     /**
      * retrieve all dbs in indexConfiguration incl. indexingRules
-     * @return HashMap using dbKey as key and indexingRules as value
+     * @return HashMap using key as key and indexingRules as value
      */
     public HashMap retrieveIndexedDbs() {
         HashMap indexedDbs = new HashMap();

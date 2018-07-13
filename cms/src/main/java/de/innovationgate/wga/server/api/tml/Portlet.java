@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -330,7 +330,7 @@ public interface Portlet {
      * Sets a WebTML portlet session variable
      * @param name Name of the variable
      * @param value Value of the variable
-     * @param allowSerialization Controls if this variable should be serialized to other cluster nodes in a server cluster. This is only possible if the value type is serializable.
+     * @param allowSerialization Controls if this variable should be serialized to other cluster nodes in a databaseServer cluster. This is only possible if the value type is serializable.
      * @throws WGAPIException
      */
     @CodeCompletion(preferredCase="setSessionVar")

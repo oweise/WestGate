@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ package de.innovationgate.wgpublisher;
 import de.innovationgate.webgate.api.WGException;
 
 /**
- * Base exception for problems occuring in the OpenWGA server classes
+ * Base exception for problems occuring in the OpenWGA databaseServer classes
  */
 public class WGAServerException extends WGException {
 

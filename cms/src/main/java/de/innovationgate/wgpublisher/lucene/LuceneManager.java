@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -580,13 +580,13 @@ public class LuceneManager implements WGContentEventListener, WGDatabaseConnectL
         // for each indexed db, register eventlistener if db is connected to the core
         Iterator indexedDBKeys = _indexedDbs.keySet().iterator();
         while (indexedDBKeys.hasNext()) {
-            String dbKey = (String) indexedDBKeys.next();
-            WGDatabase db = (WGDatabase) _core.getContentdbs().get(dbKey);
+            String key = (String) indexedDBKeys.next();
+            WGDatabase db = (WGDatabase) _core.getContentdbs().get(key);
             if (db != null) {
                 registerForContentEvents(db);
             }
             else {
-                LOG.info("Indexed db " + dbKey + " is not connected to WGA");
+                LOG.info("Indexed db " + key + " is not connected to WGA");
             }
         }*/
         
@@ -683,7 +683,7 @@ public class LuceneManager implements WGContentEventListener, WGDatabaseConnectL
                     // remove db and drop from index
                     removeDatabase(dbKey, true);
                     // remove from indexed dbs - this is not done by removeDatabase because of list iteration issue see creating droprequests above
-                    //_indexedDbs.remove(dbKey); // now done in removeDatabase via copy-replace
+                    //_indexedDbs.remove(key); // now done in removeDatabase via copy-replace
                 }
             } else {
                 if (newConnectedDBKeys == null) {
@@ -1071,7 +1071,7 @@ public class LuceneManager implements WGContentEventListener, WGDatabaseConnectL
         }
            
         /**
-         * performs addition requests for the database dbKey
+         * performs addition requests for the database key
          * only requests within currentListSize are processed to ensure additions and deletions are in sync
          * @param dbKey database to process
          * @param currentListSize number of items from additionrequestsList to process
@@ -1097,7 +1097,7 @@ public class LuceneManager implements WGContentEventListener, WGDatabaseConnectL
                     if(_customSimilarity!=null)
                     	writer.setSimilarity(_customSimilarity);
     
-                    // additionrequests are grouped by dbKey
+                    // additionrequests are grouped by key
                     // get list from map
                     Queue<IndexingRequest> requests = _additionRequestsMap.get(dbKey);
                     // iterate over current listSize to be sure to process addition
@@ -1266,7 +1266,7 @@ public class LuceneManager implements WGContentEventListener, WGDatabaseConnectL
 
              
         /**
-         * performs deletion requests for the database dbKey
+         * performs deletion requests for the database key
          * only requests within currentListSize are processed to ensure additions and deletions are in sync
          * @param dbKey database to process
          * @param currentListSize number of items from deletionrequestsList to process
@@ -1291,7 +1291,7 @@ public class LuceneManager implements WGContentEventListener, WGDatabaseConnectL
                 try {                
                     reader = IndexReader.open(_indexDirectory, false);
     
-                    // deletionrequests are grouped by dbKey
+                    // deletionrequests are grouped by key
                     // get list from deletionRequestsMap
                     Queue<IndexingRequest> requests = _deletionRequestsMap.get(dbKey);
     

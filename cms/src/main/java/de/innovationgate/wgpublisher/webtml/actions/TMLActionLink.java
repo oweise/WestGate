@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -212,7 +212,7 @@ public class TMLActionLink {
 	}
 
 	/**
-	 * Returns the dbKey.
+	 * Returns the key.
 	 * @return String
 	 */
 	public String getDbKey() {
@@ -220,8 +220,8 @@ public class TMLActionLink {
 	}
 
 	/**
-	 * Sets the dbKey.
-	 * @param dbKey The dbKey to set
+	 * Sets the key.
+	 * @param dbKey The key to set
 	 */
 	public void setDbKey(String dbKey) {
 		this._dbKey = dbKey;

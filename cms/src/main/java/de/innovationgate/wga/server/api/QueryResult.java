@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ public class QueryResult extends CollectionResult {
     }
     
     /* (non-Javadoc)
-     * @see de.innovationgate.wga.server.api.CollectionResult#getFirstResultContent()
+     * @see de.innovationgate.wga.databaseServer.api.CollectionResult#getFirstResultContent()
      */
     @Override
     public WGContent getFirstResultContent() throws WGException {

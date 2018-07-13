@@ -26,7 +26,7 @@ public interface ClientFactoryService {
     
     /**
      * Creates a client for custom services
-     * @param wgaRootURL The root url of the OpenWGA server
+     * @param wgaRootURL The root url of the OpenWGA databaseServer
      * @param properties Properties passed to the client factory service
      * @return A services client
      * @throws MalformedURLException
@@ -37,7 +37,7 @@ public interface ClientFactoryService {
     
     /**
      * Creates a client for core services
-     * @param wgaRootURL The root url of the OpenWGA server
+     * @param wgaRootURL The root url of the OpenWGA databaseServer
      * @param properties Properties passed to the client factory service
      * @return A services client
      * @throws MalformedURLException

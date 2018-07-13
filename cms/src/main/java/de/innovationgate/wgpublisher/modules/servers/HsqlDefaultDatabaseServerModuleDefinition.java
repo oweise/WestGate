@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ public class HsqlDefaultDatabaseServerModuleDefinition extends HsqlDatabaseServe
         props.setSingleton(true);
         props.setSingletonTitle("defaultserver.title");
         props.setSingletonTitleBundleLoader(_bundleLoader);
-        props.setSingletonUID(WGAConfiguration.SINGLETON_SERVER_PREFIX + getImplementationClass());
+        props.setSingletonUID("hsqlEmbedded");
         return props;
     }
    

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -474,7 +474,7 @@ public class Call {
      * Creates a new completely initialized HTTP cookie, which is not yet assigned to the call.
      * Use {@link #addCookie(Cookie)} to do so and send it to the client.
      * The cookie is initialized with path (the OpenWGA context path), type/maxage (transient),
-     * domain (either request host or host from configured server base url) and security
+     * domain (either request host or host from configured databaseServer base url) and security
      * flag (true if the current call is HTTPS).
      * @param name Name of the cookie
      * @param value Value of the cookie

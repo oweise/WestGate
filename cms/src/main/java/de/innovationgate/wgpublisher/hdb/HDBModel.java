@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2009, 2010 Innovation Gate GmbH. All Rights Reserved.
  * 
- * This file is part of the OpenWGA server platform.
+ * This file is part of the OpenWGA databaseServer platform.
  * 
  * OpenWGA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -322,7 +322,7 @@ public class HDBModel implements ManagedDBAttribute, WGDesignChangeListener {
             }
         }
         else {
-            getCore().getLog().info("Skipping HDB model initialisation as this server is not configured to run single node functionalities in a cluster");
+            getCore().getLog().info("Skipping HDB model initialisation as this databaseServer is not configured to run single node functionalities in a cluster");
         }
     }
 
